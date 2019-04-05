@@ -50,9 +50,9 @@ public class UserDaoTests {
         user.setName(name);
         user.setPassword(password);
 
-
-        DaoFactory daoFactory = new DaoFactory();
-        UserDao userDao = daoFactory.getUserDao();
+//
+//        DaoFactory daoFactory = new DaoFactory();
+//        UserDao userDao = daoFactory.getUserDao();
 
         //UserDao userDao = new UserDao();
         Long id = userDao.add(user);

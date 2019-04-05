@@ -106,26 +106,28 @@ public class UserDao {
 
             preparedStatement.executeUpdate();
 
-            preparedStatement = connection.prepareStatement("select last_insert_id()");
-            resultSet = preparedStatement.executeQuery();
-
-            resultSet.next();
-            id = resultSet.getLong(1);
+            id = getLastInsertId(connection);
         } finally {
-            try {
-                resultSet.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
+            if(resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
-            try {
-                preparedStatement.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
+            if(preparedStatement != null) {
+                try {
+                    preparedStatement.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
+            if(connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
             }
         }
         return id;
@@ -209,6 +211,6 @@ public class UserDao {
         }
 
         return id;
-    } // add 에서 오류 가 남 
+    } // add로부터 refactoring
 
 }
